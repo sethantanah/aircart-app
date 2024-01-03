@@ -1,0 +1,65 @@
+.toogle-records{
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top:20px;
+    .segment-button-checked{
+   --ion-background-color: #E14E66 !important;
+    color: white !important;
+}
+}
+ion-list{
+
+  width: 100%;
+}
+
+.container{
+ ion-card{
+  width: 94%;
+    .titles{
+  font-weight: bold;
+  font-size: 17px;
+
+  .semi-bold{
+      font-size: 14px;
+      margin-top: 3px;
+  }
+     }
+     .details{
+         display: flex;
+         flex-direction: column;
+
+     }
+     .status{
+        margin-top: -20px;
+         font-size: 14px;
+         font-weight: bold;
+         color: #337361;
+     }
+     #buttons{
+         display: flex;
+         flex-direction: row;
+         justify-content: space-evenly;
+         width: 100%;
+         button{
+             width: 50%;
+             font-weight: bold;
+             color: grey;
+             padding: 10px;
+         }
+         .track{
+             color: #E3617A;
+         }
+       button:hover{
+           background-color: #E3617A !important;
+           border-radius: 1px;
+           color: white;
+       }
+     }
+ }
+}
+
+.swiper{
+  width: 100%;
+  min-height: 100vh ;
+
+}

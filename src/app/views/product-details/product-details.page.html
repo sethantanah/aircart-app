@@ -1,0 +1,121 @@
+<ion-content>
+  <div *ngIf="product" class="header-container">
+    <div class="header">
+
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+      </ion-buttons>
+
+      <div  class="header-text" style="margin-left: 10px; font-weight: bold; font-size: 20px; margin-top: 5px;">
+        {{product.title}}
+      </div>
+     <div class="search">
+      <ion-icon  color="primary"  name="share-outline" (click)="share(product)" style="margin-right:20px;">
+      </ion-icon>
+        <ion-icon [color]="addedToCart ? 'primary':'light'" name="cart" (click)="checkout()">
+        </ion-icon>
+     </div>
+
+    </div>
+
+
+
+
+  </div>
+
+      <swiper *ngIf="product" [autoplay]="false" [slidesPerView]="window.outerWidth>540 ? 3 : 1" [keyboard]="true" [pagination]="true" [scrollbar]="true" [zoom]="true">
+        <ng-template swiperSlide *ngFor="let image of product.images">
+          <img class="image" [src]="image" >
+          <!-- <div class="image">
+            <img [src]="image" alt="" srcset="">
+          </div> -->
+        </ng-template>
+
+
+      </swiper>
+
+
+      <div class="container" *ngIf="product">
+
+
+
+  <ion-card class="main-container">
+    <ion-item lines="none">
+      <ion-label>
+        <span style="font-weight: 500; font-size: 19px;">{{product.title}}</span>
+      </ion-label>
+   <ion-label slot="end" *ngIf="product.sizes">Size: {{product.sizes}}</ion-label>
+    </ion-item>
+
+<ion-item lines="none">
+
+  <ion-label>GHC{{product.price - product.discount}} <span style="display: block; font-size: 12px;" *ngIf="product.negotiable">negotiable</span></ion-label>
+
+  <ion-chip slot="end" color="primary"(click)="whatsaap(product.title, product.venderInfo.phone)">
+ <ion-icon style="margin-right: 10px;" name="chatbubbles"></ion-icon>
+    Message Seller
+  </ion-chip>
+</ion-item>
+
+
+<div class="accordions">
+  <ion-accordion-group mode="ios" [value]="'sizes'">
+    <ion-accordion value="sizes" toggle-icon="chevron-don">
+
+      <ion-list slot="content">
+        <ion-item lines="none">
+
+          <div class="content">
+
+            {{product.description}}
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+
+  </ion-accordion-group>
+
+</div>
+
+  </ion-card>
+
+  <div class="heading" *ngIf="products.length>0">
+    <span>Related Products</span>
+    <span class="view-all">
+      <!-- <ion-icon name="arrow-forward"></ion-icon> -->
+    </span>
+  </div>
+<div class="offer-items">
+ <div class="wrap" *ngFor="let item of products">
+    <app-bundles-list *ngIf="item.id !== product.id" [product]="item" (click)="detailsPage(item)"></app-bundles-list>
+ </div>
+</div>
+    </div>
+
+
+
+<div class="footer">
+
+
+  <ion-button id="cart" (click)=" addedToCart = !addedToCart;  addProductCart($event, product)">
+    <ion-icon name="cart"></ion-icon>
+
+   {{ addedToCart ? 'Added to Cart':'Add to Cart'}}
+  </ion-button>
+</div>
+
+
+<!-- <ion-accordion value="shapes">
+        <ion-item slot="header">
+          <ion-label>Nutrition</ion-label>
+        </ion-item>
+
+        <ion-list slot="content">
+          <ion-item lines="none">
+            <div class="content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit consequuntur
+
+              exercitationem nam ducimus voluptatem blanditiis natus assumenda!</div>
+          </ion-item>
+        </ion-list>
+      </ion-accordion> -->
+</ion-content>

@@ -1,0 +1,38 @@
+
+  .item{
+    flex-shrink: 0;
+    width: 70px;
+    height: 100px;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+ //  box-shadow: 1px 1px 5px 1px rgb(210, 205, 205);
+   //border-radius: 50%;
+   //padding: 10px;
+   margin-left: 2px;
+img{
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+span{
+  margin-top: auto;
+  margin-bottom: auto;
+ // margin-left: 10px;
+ font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+  }
+
+   .item:hover{
+background-color: #DC3C45;
+color: white;
+span{
+  color: white;
+}
+  }
+
+
+

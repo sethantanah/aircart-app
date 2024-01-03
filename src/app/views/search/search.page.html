@@ -1,0 +1,49 @@
+<ion-header [translucent]="false" *ngIf="transparentToolBar">
+  <ion-toolbar>
+      <div class="button-bar">
+        <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+          (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+          {{cat.category}}
+        </ion-chip>
+      </div>
+        <ion-searchbar mode="ios"></ion-searchbar>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+<div class="main-container">
+  <div class="header">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="tabs/tab1" (click)="back()" mode="ios"></ion-back-button>
+    </ion-buttons>
+
+
+    <span>Search</span>
+   
+
+ 
+  </div>
+<ion-toolbar>
+  <div class="button-bar">
+    <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+      (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+      {{cat.category}}
+    </ion-chip>
+  </div>
+
+</ion-toolbar>
+
+    <ion-searchbar mode="ios" #searchTerm debounce='500' (ionChange)="search(searchTerm.value)"></ion-searchbar>
+ 
+</div>
+
+<ion-item [lines]="'none'">
+  <ion-label slot="start">Search results</ion-label>
+  <ion-label slot="end" class="results">{{products.length}} results</ion-label>
+</ion-item>
+<div class="search-results" *ngIf="products.length>0">
+  <app-products-list  *ngFor="let product of products;" [product]="product" [discount]="false" (click)="detailsPage(product)"></app-products-list>
+</div>
+</ion-content>

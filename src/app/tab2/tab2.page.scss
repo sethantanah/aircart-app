@@ -1,0 +1,231 @@
+  
+  .main-container{
+    padding: 5px 0.7em;
+  }
+
+ .header{
+  padding: 10px 0.3em;
+  padding-bottom: 20px;
+  display: flex;
+  ion-icon{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 25px;
+  }
+  .search{
+    margin-left: auto;
+    font-size: 15px;
+    color: #DC3C45;
+  }
+  span{
+        margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 22px;
+  }
+}
+
+
+
+
+
+
+    .item{
+    display: grid;
+    grid-template-columns: 17% auto ;
+    
+    background-color: #F7F7F7;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    .wrap{
+    display: grid;
+    grid-template-columns: 62% auto ;
+    }
+    img{
+      height: 60px;
+
+      border-radius: 5px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .description{
+      margin-left: 10px;
+      span{
+        display: block;
+      }
+      .title{
+        font-weight: bold;
+        padding-bottom: 1px;
+      }
+      .size{
+        color: gray;
+        font-size: 13px;
+      }
+    }
+         .price{
+            //font-weight: bold;
+            font-size: 15px;
+            color: black;
+            margin-top: auto;
+            margin-bottom: 20px;
+            margin-left: 45px;
+            width: 100%;
+            padding-right: 10px;
+            span{
+              display: block;
+              
+            }
+            .isdiscount{
+              text-decoration: line-through;
+              color:#E14E66;
+              font-size: 13px;
+            }
+          }
+          .increment{
+        
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            margin-left: 77%;
+            margin-right: 0;
+            width: auto;
+          }
+          .cart, ion-button{
+flex-shrink: 0;
+--background-color: #FAE4E6;
+border-radius: 5px;
+width: 30px;
+max-height: 30px;
+color: white;
+//margin-left: 20px;
+
+text-align: center;
+font-size: 17px;
+ion-icon{
+  color: #E14E66;
+  margin-top: 5px;
+
+  font-size: 30px;
+}
+          }
+          .count{
+            background-color: transparent;
+            color: #E14E66;
+            font-size: 18px;
+            padding-top: 8px;
+            font-weight: bold;
+            width: auto;
+            margin-left: 5px;
+          }
+
+          #trash{
+            margin-right: 20px;
+            margin-left: -30px;
+          }
+          #trash:hover{
+            font-size: 35px;
+          }
+        
+  }
+
+
+      ion-list{
+    
+    padding-bottom: 10em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  ion-list::-webkit-scrollbar{
+    display: none;
+  }
+
+
+
+
+.v-order{
+
+   background-color: #E14E66;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+display: flex;
+flex-direction: row;
+gap: 20px;
+ion-icon{
+  font-size: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
+  
+}
+  
+}
+
+  audio{
+     
+ 
+   border-radius: 0;
+    }
+
+audio::-webkit-media-controls-panel{
+     background-color: #E14E66;
+     border: 0px solid white;
+     border-radius: 0;
+}
+
+audio::-webkit-media-controls-mute-button{
+  display: none;
+}
+
+
+audio::-webkit-media-controls-time-remaining-display{
+display: none;
+}
+
+
+
+  .summary{
+ position: fixed;
+    width: 100%;
+    top: auto;
+    bottom: 0px;
+    background-color: white;
+   box-shadow: 1px 1px 13px 1px rgb(210, 205, 205);
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+    .sub-total, .shipping, .total{
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: black;
+  .cost{
+    margin-left: auto;
+  
+    font-size: 14px;
+  }
+    }
+    .total{
+      font-weight: bold;
+      margin-bottom: 20px;
+      .cost{
+        font-size: 17px;
+      }
+    }
+    #button{
+      width: 92%;
+      margin-left: 4%;
+      text-transform: title-case;
+      ion-icon{
+        margin-right: 20px;
+      }
+    }
+  }

@@ -1,0 +1,80 @@
+<ion-header [translucent]="false" class="ion-no-border">
+  <ion-toolbar style=" background-color:white">
+    <ion-buttons slot="start">
+      <ion-back-button  text="" defaultHref="tabs/tab1" mode="ios" (click)="createAds()"></ion-back-button>
+    </ion-buttons>
+  <ion-title style="color:black">Dashboard</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="button-bar">
+     <div style="display:flex; flex-direction:column"  *ngFor="let btn of categories; let i = index"
+     (click)="categories[i].selected = !categories[i].selected;  nextSlide(i) " [ngClass]="{active : btn.selected}">
+      <span>{{ btn.name }}</span>
+    <!-- size="small" [color]="btn.selected ? 'danger': 'primary'" -->
+    <span class="underline" style="padding:2px; height:1px; margin-top: 4px;"></span>
+ 
+    </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+  <!-- <div style="display:flex; flex-direction:row">
+  <ion-buttons >
+    <ion-back-button text="" defaultHref="tabs/tab1" mode="ios" (click)="createAds()"></ion-back-button>
+  </ion-buttons>
+<ion-title>Dashboard</ion-title>
+</div>
+  <ion-toolbar>
+    <div class="button-bar">
+      <ion-chip size="small" *ngFor="let btn of categories; let i = index" [color]="btn.selected ? 'danger': 'primary'"
+        (click)="categories[i].selected = !categories[i].selected; removeStyles(i); nextSlide(i) ">
+        {{btn.name}}
+      </ion-chip>
+    </div>
+  
+  </ion-toolbar> -->
+
+  <swiper [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="true" [zoom]="true"
+    (swiper)="setSwiperInstance($event)">
+    <ng-template swiperSlide>
+ 
+      <app-product-list></app-product-list>
+  
+    </ng-template>
+  
+    <ng-template swiperSlide>
+      <ion-list style="max-width:95%" *ngIf="orders">
+<app-orders [order]="order" *ngFor="let order of orders"></app-orders>
+</ion-list>
+    </ng-template>
+
+    <ng-template swiperSlide>
+  
+   <div class="container">
+      <h3>Feature Coming Soon</h3>
+   </div>
+    </ng-template>
+
+      <ng-template swiperSlide>
+      
+        <div class="container-ac" >
+          <ion-card (click)="postProduct()" class="ion-activatable ripple-parent">
+        
+              Post a Product
+              <ion-ripple-effect></ion-ripple-effect>
+          </ion-card>
+
+            <ion-card (click)="createCategory()"  class="ion-activatable ripple-parent">
+        
+               Manage Categories and Banners
+             
+               <ion-ripple-effect></ion-ripple-effect>
+            </ion-card>
+
+           
+        </div>
+      </ng-template>
+  </swiper>
+
+</ion-content>

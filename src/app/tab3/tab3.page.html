@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+  <div class="main-container">
+    <div class="header">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+      </ion-buttons>
+      <span>Cart</span>
+      <span class="search">
+        {{ productsCount}} items
+      </span>
+    </div>
+
+
+    <ion-list id="ion-list" *ngIf="products.length > 0">
+
+<div class="item" *ngFor="let item of products">
+<app-cart-item  [product]="item"></app-cart-item>
+<hr>
+</div>
+    
+      
+    </ion-list>
+
+
+   
+
+
+  </div>
+  <div class="summary">
+    <!-- <div class="sub-total">
+      <span>Subtotal</span>
+      <span class="cost">GHC1290</span>
+    </div>
+    <div class="shipping">
+      <span>Shipping fee</span>
+      <span class="cost">GHC1290</span>
+    </div> -->
+    <div class="total">
+      <span>Total</span>
+      <span class="cost">GHC{{price}}</span>
+    </div>
+
+    <ion-button id="button" (click)="checkOut($event)" >
+   <ion-icon name="cart-outline"></ion-icon>
+   <span>Proceed to checkout</span>
+    </ion-button>
+  </div>
+</ion-content>

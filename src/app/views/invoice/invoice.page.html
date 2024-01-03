@@ -1,0 +1,127 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+  <div class="header" style="display:flex; flex-direction: row; margin-left: .7em;">
+      <ion-buttons>
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Order History</ion-title>
+  </div>
+
+  <div class="toogle-records">
+    <ion-segment mode="ios"  (ionChange)="segmentChanged($event)">
+      <ion-segment-button  color="danger" value="today" [class]="segmentClass" (click)="nextSlide(0)">
+
+        <ion-label>Active ({{activeOrders.length}})</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="alltime" (click)="nextSlide(1)">
+        <ion-label>Past Orders ({{completeOrders.length}})</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<div class="container">
+  <swiper  [autoplay]="false"  [spaceBetween]="10" [keyboard]="true" [pagination]="false" [scrollbar]="true" [zoom]="true"  (swiper)="setSwiperInstance($event)">
+    <ng-template swiperSlide>
+    <ion-list *ngIf="activeOrders.length> 0">
+
+      <ion-card *ngFor="let item of activeOrders">
+        <ion-item lines="none" class="titles">
+          <ion-label>
+            <ion-label style="font-size: 15px;">{{formatDate(item.orderDate)}}</ion-label>
+            <ion-label class="semi-bold">Order {{item.orderId}}</ion-label>
+          </ion-label>
+          <ion-label slot="end">
+            <ion-label>GHC{{item.price}}</ion-label>
+            <ion-label style="opacity: 0;">Price</ion-label>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+
+          <div class="details">
+            <p style="display: flex; flex-direction: row; margin-bottom: 0;">
+              <span>
+                <ion-icon color="primary" name="basket"></ion-icon>
+              </span>
+              <span *ngFor="let product of item.products">{{product.title}} ({{product.count}})<span
+                  style="margin-right:10px">, </span></span>
+            </p>
+            <p class="status" *ngIf="item.is_pending">
+              <svg id="Kebab_icon" data-name="Kebab icon" xmlns="http://www.w3.org/2000/svg" width="10" height="50"
+                viewBox="0 0 10 50">
+                <rect id="Rectangle_53" data-name="Rectangle 53" width="10" height="10" rx="5"
+                  transform="translate(10 40) rotate(90)" fill="#337361" />
+              </svg> Processing order
+
+            </p>
+          </div>
+
+        </ion-item>
+
+        <ion-item id="buttons" lines="none">
+          <button (click)="cancelOrder($event, item.products, item.orderId)">Cancel Order</button>
+          <button class="track" (click)="track($event, item.products, item.orderId)">Track Order</button>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+    </ng-template>
+
+
+      <ng-template swiperSlide>
+        <ion-list>
+          <ion-card *ngFor="let item of completeOrders">
+            <ion-item lines="none" class="titles">
+              <ion-label>
+                <ion-label style="font-size: 15px;">{{formatDate(item.updatedDate)}}</ion-label>
+                <ion-label class="semi-bold">Order {{item.orderId}}</ion-label>
+              </ion-label>
+              <ion-label slot="end">
+                <ion-label>GHC{{item.price}}</ion-label>
+                <ion-label style="opacity: 0;">Price</ion-label>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none">
+
+              <div class="details">
+                <p style="display: flex; flex-direction: row; margin-bottom: 0;">
+                  <span>
+                    <ion-icon color="primary" name="basket"></ion-icon>
+                  </span>
+                  <span *ngFor="let product of item.products">{{product.title}} ({{product.count}})<span
+                      style="margin-right:10px">, </span></span>
+                </p>
+                <p class="status" *ngIf="item.is_cancelled">
+                  <svg id="Kebab_icon" data-name="Kebab icon" xmlns="http://www.w3.org/2000/svg" width="10" height="50"
+                    viewBox="0 0 10 50">
+                    <rect id="Rectangle_53" data-name="Rectangle 53" width="10" height="10" rx="5"
+                      transform="translate(10 40) rotate(90)" fill="#337361" />
+                  </svg> Order was cancelled
+                </p>
+
+                <p class="status" *ngIf="item.is_delivered">
+                  <svg id="Kebab_icon" data-name="Kebab icon" xmlns="http://www.w3.org/2000/svg" width="10" height="50"
+                    viewBox="0 0 10 50">
+                    <rect id="Rectangle_53" data-name="Rectangle 53" width="10" height="10" rx="5"
+                      transform="translate(10 40) rotate(90)" fill="#337361" />
+                  </svg> Order delivered
+                </p>
+              </div>
+            </ion-item>
+
+
+          </ion-card>
+        </ion-list>
+      </ng-template>
+  </swiper>
+
+
+
+
+</div>
+</ion-content>

@@ -1,0 +1,169 @@
+
+.welcome-text, ion-text{
+
+  width: 60%;
+font-size: 1.5rem;
+span{
+  font-weight: bold;
+}
+}
+
+ion-searchbar{
+ display: none;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 1px rgb(243, 240, 240);
+  height: 50px;
+  margin-top: 20px;
+}
+
+.category-items{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+
+  padding: 0;
+  .view-all{
+    margin-left: auto;
+
+      font-size: 14px;
+      font-weight: normal;
+      color: #E14E66;
+  }
+  .categories{
+    display: flex;
+    flex-direction: row;
+     gap: 10px;
+  overflow-x: scroll;
+  }
+}
+.category-items::-webkit-scrollbar,.categories::-webkit-scrollbar{
+   display: none;
+}
+
+
+
+.offers{
+  margin-top: 10px;
+  img{
+    background-position: center;
+    background-size: cover;
+   height: 200px;
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 10px;
+
+
+  }
+
+  .swiper{
+       margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+
+  .offer-items{
+    display: flex;
+    margin-left: -10px;
+    overflow-x: scroll;
+
+  }
+  .offer-items::-webkit-scrollbar{
+  // display: none;
+}
+}
+
+ .heading{
+    display: flex;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+
+
+    .view-all{
+      margin-left: auto;
+      font-size: 16px;
+      font-weight: normal;
+      color: #E14E66;
+      display:flex
+
+    }
+
+    ion-icon{
+      margin-top:auto;
+      margin-bottom:auto
+    }
+  }
+  .underline{
+    background-color: #E14E66; width:50px;  height: 5px;
+        border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;
+        margin-top:4px
+  }
+
+
+.listings{
+  margin-top: 10px;
+
+}
+
+  .list-hr{
+    display: flex;
+    flex-direction: row;
+     gap: 5px;
+  overflow-x: scroll;
+  width: 100%;
+  margin-top: 0;
+  //margin-left: -5px;
+
+  .shop{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  }
+
+.list-hr::-webkit-scrollbar{
+  // display: none;
+}
+
+  .list-hr1{
+    display: flex;
+    flex-direction: column;
+     gap: 5px;
+  overflow-x: scroll;
+  width: 100%;
+  margin-top: 15px;
+ // margin-left: -5px;
+
+  }
+
+.list-hr1::-webkit-scrollbar{
+   //display: none;
+}
+
+
+
+// .slider {
+//   overflow: hidden;
+// }
+
+// .swiper-slide {
+//   width: auto;
+//   margin-right: 20px;
+// }
+
+// .slider__item {
+//   font-size: 24px;
+//   padding: 12px 32px;
+//   background-color: #ccc;
+//   text-align: center;
+// }
+
+// .swiper-wrapper {
+//   transition-timing-function: linear;
+// }
+
+@media only screen and (min-width: 768px) {
+  .offer-of-the-day{
+    height: 300px !important;
+  }
+}

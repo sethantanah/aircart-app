@@ -1,0 +1,78 @@
+  .item{
+    display: grid;
+    grid-template-columns: 21% 68% 16%;
+
+    background-color: #F7F7F7;
+    padding: 5px;
+  //  width: 300px;
+    height: 90px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    img{
+      height: 70px;
+
+      border-radius: 5px;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 5px;
+
+      -webkit-transform: scale(0.30);
+      -moz-transform: scale(0.30);
+      -o-transform: scale(0.30);
+      transform: scale(1.25);
+    }
+    .description{
+      margin-left: 30px;
+      margin-top: auto;
+     // margin-bottom: auto;
+      span{
+        display: block;
+      }
+      .title{
+        font-weight: 400;
+        font-size: 14px;
+        padding-bottom: 1px;
+      }
+      .size{
+        color: gray;
+        font-size: 13px;
+      }
+    }
+         .price{
+            //font-weight: bold;
+            font-size: 13px;
+            color: black;
+            margin-top: auto;
+            margin-bottom: 20px;
+            span{
+              display: block;
+            }
+            .isdiscount{
+              text-decoration: line-through;
+              color:#E14E66;
+              font-size: 13px;
+            }
+          }
+          .buy{
+            display: flex;
+          }
+          .cart{
+
+background-color: #FAE4E6;
+border-radius: 5px;
+width: 30px;
+height: 30px;
+//margin-left: 20px;
+margin-top: auto;
+margin-bottom: 10px;
+
+text-align: center;
+ion-icon{
+  color: #E14E66;
+  margin-top: 5px;
+  font-size: 20px;
+}
+          }
+
+  }

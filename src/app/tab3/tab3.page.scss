@@ -1,0 +1,86 @@
+  
+  .main-container{
+    padding: 5px 0.7em;
+  
+  }
+
+
+ .header{
+  padding: 10px 0.3em;
+  padding-bottom: 20px;
+  display: flex;
+  ion-icon{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 25px;
+  }
+  .search{
+    margin-left: auto;
+    font-size: 15px;
+    color: #DC3C45;
+  }
+  span{
+        margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 22px;
+  }
+}
+
+
+
+
+
+
+    ion-list{
+    
+    padding-bottom: 10em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  ion-list::-webkit-scrollbar{
+    display: none;
+  }
+
+
+  .summary{
+    position: fixed;
+    width: 100%;
+    top: auto;
+    bottom: 0px;
+    background-color: white;
+    z-index: 99999999999;
+   box-shadow: 1px 1px 13px 1px rgb(210, 205, 205);
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+    .sub-total, .shipping, .total{
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  .cost{
+    margin-left: auto;
+  
+    font-size: 14px;
+  }
+    }
+    .total{
+      font-weight: bold;
+      .cost{
+        font-size: 17px;
+      }
+    }
+    #button{
+      width: 92%;
+      margin-left: 4%;
+      text-transform: title-case;
+
+      ion-icon{
+        margin-right: 20px;
+      }
+    }
+  }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Offer</ion-title>
+    <ion-label >{{offers.length}}</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<ion-card color="secondary" class="products" *ngFor="let item of products">
+<ion-item>
+    <ion-text>{{item.title}}</ion-text>
+</ion-item>
+
+ <ion-item lines="none">
+    <ion-label position="floating">Change Price</ion-label>
+    <ion-input [(ngModel)]="item.price"></ion-input>
+ </ion-item>
+
+
+ <ion-item lines="none" >
+<ion-label slot="start" (click)="addToOffer(item)">Add to bundle</ion-label>
+<ion-checkbox slot="end" [checked]="'false'" (click)="addToOffer(item)"></ion-checkbox>
+ </ion-item>
+
+
+</ion-card>
+</ion-content>

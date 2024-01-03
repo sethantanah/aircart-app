@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ecommerce-engine01-3401c": {
+      "hosting": {
+        "app": [
+          "ecommerce-engine01-3401c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ecommerce-engine01-3401c"
+  }
+}

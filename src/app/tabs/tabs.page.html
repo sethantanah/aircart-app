@@ -1,0 +1,320 @@
+<ion-menu contentId="main-content" type="overlay">
+  <ion-content>
+    <div class="features">
+      <div class="profile"  (click)="checkUser()" >
+          <input style="display: none" id='pimage-input' type="file" multiple="true" accept=".jpg, .png, .gif, .jpeg"
+            (change)="filesSelected($event)">
+            <ion-spinner style="position: absolute; margin: 10px;" *ngIf="isUploading"></ion-spinner>
+        <img (click)="selectFiles()" [src]="userInfo?.image ? userInfo?.image : '../../assets/images.jpg'" alt="">
+        <div class="details" *ngIf="!userInfo.name" (click)="checkUser()">
+        <ion-item lines="none">
+
+          <ion-label>Update profile</ion-label>
+          <ion-icon slot="end" name="pencil"></ion-icon>
+        </ion-item>
+        </div>
+
+
+        <div class="details" *ngIf="userInfo" (click)="model.present()">
+          <ion-label>
+            {{userInfo?.name}}
+          </ion-label>
+          <ion-label>
+            {{userInfo?.phone}}
+          </ion-label>
+          <ion-label>
+            <ion-icon *ngIf="userInfo?.address" name="location"></ion-icon>
+            <ion-label>
+              {{userInfo?.address}}
+            </ion-label>
+          </ion-label>
+
+        </div>
+        <ion-icon (click)="model.present()" *ngIf="userInfo?.name" style="font-size:20px; margin-left: auto; margin-top:auto; margin-bottom:auto" name="pencil"></ion-icon>
+      </div>
+
+    </div>
+    <br>
+    <hr>
+
+    <div>
+
+
+      <ion-item button lines="none" *ngIf="!userInfo?.name" (click)="registrationPage()">
+
+        <ion-label style="font-weight:bold; color: #E14E66">Setup A Shop</ion-label>
+      </ion-item>
+
+      <ion-item button lines="none" *ngIf="userInfo?.name" (click)="model.present()">
+
+        <ion-label style="font-weight:bold; color: #E14E66">Update shop details</ion-label>
+      </ion-item>
+
+      <ion-item button lines="none" (click)="postProduct()">
+
+        <ion-label>Sell your Product</ion-label>
+      </ion-item>
+
+
+
+      <ion-item button lines="none" (click)="topProducts()">
+
+        <ion-label>Top Deals</ion-label>
+      </ion-item>
+
+      <ion-item button lines="none" (click)="orderHistory()">
+
+        <ion-label>Order History</ion-label>
+      </ion-item>
+      <ion-item button  lines="none">
+
+        <ion-label (click)="whatsaap()">Request a product</ion-label>
+      </ion-item>
+
+
+
+      <hr>
+
+
+
+    </div>
+    <hr>
+
+    <ion-item button lines="none">
+
+      <ion-label (click)="whatsaap()">Customer support</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" id="trigger-button-p" >
+
+      <ion-label >About AirCart</ion-label>
+    </ion-item>
+
+
+    <ion-item button lines="none" (click)="privacyPage()"  >
+
+      <ion-label >Privacy and Terms of use</ion-label>
+    </ion-item>
+
+
+    <ion-item button lines="none" (click)="logout()">
+
+      <ion-label>{{loggedIn ? 'Logout' : 'Login'}}</ion-label>
+    </ion-item>
+
+
+
+
+
+
+    <ion-modal trigger="trigger-button" #model [swipeToClose]="true" [initialBreakpoint]="0.8"
+      [breakpoints]="[0.1, 0.5, 0.95]">
+      <ng-template>
+  <form  [formGroup]="registerForm" style="padding: 1.5em; overflow-y: scroll; height: 100%;">
+    <div class="toogle-records">
+      <ion-segment mode="ios" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="user" [class]="segmentClass">
+
+          <ion-label>User Account</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="vender">
+          <ion-label>Vender Account</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div class="input-group">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="accountType === 'vender'">
+        <ion-label position="floating">Business name</ion-label>
+        <ion-input type="text" placeholder="Business name" formControlName="businessName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item  *ngIf="accountType === 'vender'">
+        <ion-label>Products Category</ion-label>
+        <ion-select formControlName="category"
+          interface="popover">
+          <ion-select-option [value]="cat.category" *ngFor="let cat of topCategories">
+            {{cat.category}}
+          </ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item  *ngIf="accountType === 'vender'">
+      <ion-label position="floating">Tagline</ion-label>
+      <ion-input type="text" placeholder="Business Tagline" formControlName="tagline"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="accountType === 'vender'">
+      <ion-label position="floating">About</ion-label>
+      <ion-textarea rows="3" type="text" placeholder="About your business" formControlName="about"></ion-textarea>
+    </ion-item>
+
+
+
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
+
+
+
+      <ion-item >
+        <ion-input type="Phone" placeholder="Phone number" formControlName="phone"></ion-input>
+      </ion-item>
+
+
+      <ion-item lines="none" *ngIf="accountType === 'vender'" button  (click)="regionspop.present()"
+      >
+       <ion-label slot="start" >Location</ion-label>
+       <ion-label slot="start" class="ion-text-wrap" style="color:var(--ion-color-secondary)">{{registerForm.value?.locality}}</ion-label>
+       <ion-icon slot="end" name="map" color="primary"></ion-icon>
+     </ion-item>
+
+      <ion-item *ngIf="accountType === 'vender'">
+        <ion-label position="floating">Address</ion-label>
+        <ion-input type="Address" placeholder="Address" formControlName="address"></ion-input>
+      </ion-item>
+
+
+    </div>
+
+ <ion-button style="width: 100%;margin-top: 10px;" (click)="updateUser(); model.dismiss()">Update</ion-button>
+
+
+ <ion-popover  style="--offset-y: -280px"  #regionspop  [dismissOnSelect]="true" [backdropDismiss]="true" [showBackdrop]="true" >
+  <ng-template>
+   <ion-list style="height: 100%; overflow-y: scroll; padding-bottom: 2em;padding-top:1em">
+    <ion-item  (click)="setRegion(region); citiespop.present()" button lines="none" *ngFor="let region of regions">{{region}}
+
+
+    </ion-item>
+   </ion-list>
+  </ng-template>
+</ion-popover>
+
+
+<ion-popover  style="--offset-y: -300px"  #citiespop  [dismissOnSelect]="true" [backdropDismiss]="true" [showBackdrop]="true" >
+  <ng-template>
+   <ion-list style="height: 100%; overflow-y: scroll; padding-bottom: 2em;padding-top:1em">
+    <ion-item  (click)="setLocation(city); regionspop.dismiss()" button lines="none" *ngFor="let city of cities">{{city}}
+
+
+    </ion-item>
+   </ion-list>
+  </ng-template>
+</ion-popover>
+  </form>
+
+      </ng-template>
+    </ion-modal>
+
+
+
+    <ion-modal trigger="trigger-button-p" #privacyPolicy [swipeToClose]="true" [initialBreakpoint]="1"
+    [breakpoints]="[1, 1, 1]" [handle]="true">
+    <ng-template style="border-radius: 20px;">
+      <div class="modal-container">
+       <div class="nav" style="display:flex; gap:20px">
+        <span class="option-refresh"(click)="privacyPolicy.dismiss()">
+          <ion-icon name="arrow-back"></ion-icon>
+
+        </span>
+
+        <span style="margin-left:auto" class="option-refresh"(click)="share()">
+          <ion-icon name="share"></ion-icon>
+
+        </span>
+        <span class="option-refresh"(click)="whatsaap()">
+          <ion-icon name="chatbubbles"></ion-icon>
+
+        </span>
+
+        <!-- <span class="option-refresh"(click)="whatsaap()">
+          <ion-icon name="star"></ion-icon>
+
+        </span> -->
+       </div>
+        <div class="heading">
+          <h2>AirCart</h2>
+          <span style="font-size:13px; padding-top:-20px">All your needs at one place</span>
+        </div>
+
+      <div class="description" >
+        <p>AirCart is a multi-vender ecommerce platform built to help entrepreneurs put thier valuable products before thier amazing customers.
+
+ </p>
+ <p>We provide exceptional services for you to easily create and manage your products and handle sales. For our amazing customers we have a simple and fast checkout system, an advanced search feature for your to easily find what you want, and we work hand in hand with our venders to provide you with the best products at the most affordable prices.
+</p>
+<p>
+ Our goal at AirCart is to provide you with the best ecommerce services to maximize your growth and value for money.
+</p>
+
+
+
+
+      </div >
+      </div>
+
+      <div class="footer">
+
+        <div class="learn" style="margin-bottom: 7px !important;">
+          <span >AirCart Community</span>
+        </div>
+      <div class="learn" style="margin-bottom: 4px !important;" (click)="privacyPage();privacyPolicy.dismiss()">
+        <span >Privacy policy and terms of use</span>
+      </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
+
+
+<ion-fab vertical="bottom" horizontal="center" (click)="toCartPage($event)">
+  <ion-fab-button>
+    <ion-icon name="cart"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Shop</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-label>Search</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tab3" style="opacity: 0;">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-label>Search</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="invoice">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <ion-label>History</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="podium-outline"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

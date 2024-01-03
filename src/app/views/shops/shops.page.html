@@ -1,0 +1,87 @@
+<ion-header [translucent]="false" *ngIf="transparentToolBar">
+  <ion-toolbar>
+      <div class="button-bar">
+        <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+          (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+          {{cat.category}}
+        </ion-chip>
+      </div>
+      <ion-searchbar mode="ios" #searchTerm debounce='500' (ionChange)="search(searchTerm.value)"></ion-searchbar>
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+  <div class="main-container">
+    <div class="header">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+      </ion-buttons>
+
+
+      <span>Shops</span>
+
+
+      <div style="margin-left: auto;">
+        <ion-chip (click)="cancelCity()" style="margin-top: auto; margin-bottom:5px;" color="primary" *ngIf="selectedCity">
+          <ion-icon color="danger" name="close" style="margin-top: -4px;"></ion-icon>
+          <ion-label>{{selectedCity}}</ion-label>
+        </ion-chip>
+
+        <ion-icon style="margin-bottom: -6px;" (click)="citiespop.present()" name="location"></ion-icon>
+      </div>
+    </div>
+
+    <ion-toolbar style="margin-top:-15px;margin-left:15px;">
+      <div class="button-bar">
+        <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+          (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+          {{cat.category}}
+        </ion-chip>
+      </div>
+      <ion-searchbar mode="ios" #searchTerm debounce='500' (ionChange)="search(searchTerm.value)"></ion-searchbar>
+
+    </ion-toolbar>
+
+  </div>
+
+
+  <div *ngIf="shops.length === 0 && noshops" style="display:flex;flex-direction:column; justify-content:center;text-align:center" >
+    <!-- <img style="margin: auto auto auto; width: 150px; height:150px" src="data:image/jpeg;base64,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"> -->
+  <ion-label *ngIf="selectedCity">Shops in {{selectedCity}} are yet to be on AirCart, check again soon</ion-label>
+  <ion-label *ngIf="!selectedCity && filter !== 'All'">Shops under selected category are yet to be on AirCart, check again soon. </ion-label>
+  <ion-label *ngIf="!selectedCity && filter === 'All'" >Unable to load shops, check your internet connection.</ion-label>
+  </div>
+  <div style="display:flex" *ngIf="shops.length === 0 && !noshops">
+    <ion-spinner style="margin: auto auto auto" name="bubbles"></ion-spinner>
+  </div>
+<!-- <div style="display:flex"  style="margin:0; padding:0;"> -->
+
+
+  <!--   -->
+<!-- </div> -->
+
+<ion-grid>
+  <ion-row *ngIf="shops.length > 0">
+   <div *ngFor="let shop of shops">
+    <app-shop-list *ngIf="shop.category !== null"   (click)="toshopDetails(shop.id)" [shop]="shop" >
+
+    </app-shop-list>
+   </div>
+  </ion-row>
+
+</ion-grid>
+
+<ion-popover  style="--offset-y: -300px"  #citiespop  [dismissOnSelect]="false" [backdropDismiss]="true" [showBackdrop]="true" >
+  <ng-template>
+    <ion-searchbar mode="ios" #searchCity debounce='100' (ionChange)="searchCities(searchCity.value)"
+    style="margin-top: 10px;"></ion-searchbar>
+   <ion-list>
+    <ion-item  (click)="citiespop.dismiss();  filterByCity(city)" button lines="none" *ngFor="let city of citiesTemp">{{city}}
+
+
+    </ion-item>
+   </ion-list>
+  </ng-template>
+</ion-popover>
+</ion-content>

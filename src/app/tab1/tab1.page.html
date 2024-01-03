@@ -1,0 +1,58 @@
+<ion-header [translucent]="true" *ngIf="transparentToolBar">
+  <ion-toolbar>
+<div class="header">
+<ion-icon name="apps" class="menu" (click)="openMenu()">
+</ion-icon>
+  <div class="header-text">
+  <ion-text>AirCart</ion-text>
+  <p>Better, cheaper, bigger</p>
+  </div>
+  <div  class="search-icon" >
+    <a [routerLink]="['/shops']"  >
+      <img style="margin-right: 10px"   src="../../assets/shop.svg">
+    </a>
+  
+    <a style="color:black" [routerLink]="['/tabs/tab3']" >
+      <span class="badge"  >
+        {{cartCount}}
+          </span>
+            <ion-icon  name="cart-outline" ></ion-icon>
+    </a>
+      
+   </div>
+</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+<div class="header">
+<ion-icon name="apps" (click)="openMenu()">
+</ion-icon>
+
+  <div class="header-text">
+   
+    <ion-text>AirCart</ion-text>
+    <p>All your needs in one place</p>
+  </div>
+ <div  class="search-icon" >
+  <a [routerLink]="['/shops']"  >
+    <img style="margin-right: 10px"   src="../../assets/shop.svg">
+  </a>
+
+  <a style="color:black" [routerLink]="['/tabs/tab3']" >
+    <span class="badge"  >
+      {{cartCount}}
+        </span>
+          <ion-icon  name="cart-outline" ></ion-icon>
+  </a>
+    
+ </div>
+</div>
+
+<div class="main-content">
+
+  <app-explore-container  name="Tab 1 page"></app-explore-container>
+    </div>
+
+   
+</ion-content>

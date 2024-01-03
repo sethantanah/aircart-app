@@ -1,0 +1,138 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/tab1" [routerLink]="['/tabs/tab1']" routerLinkActive="router-link-active"  mode="ios"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<div style=" display: flex; justify-content: center">
+<ion-avatar  style="margin-left: auto; margin-right:auto; width:150px; height:150px">
+  <img  [src]="accountType === 'user' ?
+  'https://www.djdesignerlab.com/wp-content/uploads/2020/09/e-commerce-website.jpg' :
+   'https://th.bing.com/th?q=Engaging+E-Commerce+Icons&w=120&h=120&c=1&rs=1&qlt=90&cb=1&pid=InlineBlock&mkt=en-WW&cc=GH&setlang=en&adlt=moderate&t=1&mw=247'">
+</ion-avatar>
+</div>
+ <div class="form-container">
+  <form class="form" (ngSubmit)="register()" [formGroup]="registerForm">
+    <div class="forms">
+     <ion-card>
+      <div style="margin-bottom:10px; font-size:18px; font-weight: bold;text-align: center; color:#211f20">
+        <ion-label>{{accountType === 'user' ? 'Experience better shopping with AirCart' : 'Grow your sales with AirCart for free!!!'}}</ion-label>
+      </div>
+    <div class="toogle-records">
+      <ion-segment mode="ios" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="user" [class]="segmentClass">
+
+          <ion-label>User Account</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="vender">
+          <ion-label>Vender Account</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+      <ion-item>
+        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+      </ion-item>
+
+        <ion-item *ngIf="accountType === 'vender'">
+          <ion-input type="text" placeholder="Business name" formControlName="businessName"></ion-input>
+        </ion-item>
+
+      <ion-item>
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+
+
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
+
+
+
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input type="Phone" placeholder="Phone number" formControlName="phone"></ion-input>
+      </ion-item>
+      <!-- <ion-item  *ngIf="accountType === 'vender'">
+        <ion-input type="text"  placeholder="Whatsapp link" formControlName="whatsappLink"></ion-input>
+      </ion-item> -->
+
+
+
+      <ion-item lines="none" *ngIf="accountType === 'vender'" button  (click)="regionspop.present()"
+      >
+       <ion-label slot="start" >Location</ion-label>
+       <ion-label slot="start" class="ion-text-wrap" style="color:var(--ion-color-secondary)">{{registerForm.value?.locality}}</ion-label>
+       <ion-icon slot="end" name="map" color="primary"></ion-icon>
+     </ion-item>
+
+
+     <ion-item  *ngIf="accountType === 'vender'">
+
+      <ion-input type="Address" placeholder="Address" formControlName="address"></ion-input>
+    </ion-item>
+
+      <ion-item  *ngIf="accountType === 'vender'">
+          <ion-label>Products Category</ion-label>
+          <ion-select formControlName="category"
+            interface="popover">
+            <ion-select-option [value]="cat.category" *ngFor="let cat of topCategories">
+              {{cat.category}}
+            </ion-select-option>
+          </ion-select>
+      </ion-item>
+
+      <ion-item  *ngIf="accountType === 'vender'">
+        <ion-input type="text" placeholder="Business Tagline" formControlName="tagline"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf="accountType === 'vender'">
+        <ion-textarea rows="3" type="text" placeholder="About your business" formControlName="about"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div>
+
+
+    <ion-button type="submit" expand="block" [disabled]="!registerForm.valid">Sign up</ion-button>
+    <ion-button type="button" style="font-size:13px" expand="block" color="danger" fill="clear" [routerLink]="['/login', 'user' ]">Already Have an account? Sign in!
+    </ion-button>
+
+      </ion-card>
+    </div>
+
+    <ion-popover  style="--offset-y: -250px"  #regionspop  [dismissOnSelect]="true" [backdropDismiss]="true" [showBackdrop]="true" >
+      <ng-template>
+       <ion-list style="height: 100%; overflow-y: scroll; padding-bottom: 2em;padding-top:1em">
+        <ion-item  (click)="setRegion(region); citiespop.present()" button lines="none" *ngFor="let region of regions">{{region}}
+
+
+        </ion-item>
+       </ion-list>
+      </ng-template>
+    </ion-popover>
+
+
+    <ion-popover  style="--offset-y: -250px"  #citiespop  [dismissOnSelect]="true" [backdropDismiss]="true" [showBackdrop]="true" >
+      <ng-template>
+       <ion-list style="height: 100%; overflow-y: scroll; padding-bottom: 2em;padding-top:1em">
+        <ion-item  (click)="setLocation(city); regionspop.dismiss()" button lines="none" *ngFor="let city of cities">{{city}}
+
+
+        </ion-item>
+       </ion-list>
+      </ng-template>
+    </ion-popover>
+  </form>
+ </div>
+</ion-content>

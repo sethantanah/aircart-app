@@ -1,0 +1,81 @@
+<ion-header [translucent]="true" class="ion-no-border" *ngIf="transparentToolBar">
+  <ion-toolbar>
+
+      <div class="favorite">
+        <ion-buttons >
+          <ion-back-button  text="" defaultHref="tabs/tab1" mode="ios" ></ion-back-button>
+        </ion-buttons>
+
+
+        <div *ngIf="!removeTitle" style="display:flex; flex-direction:column">
+          <ion-label class="title">{{userInfo.businessName}}</ion-label>
+          <ion-label style="color:white; margin-top:-10px; margin-left:4px" *ngIf="userInfo.followers > 0">{{userInfo.followers}} followers</ion-label>
+        </div>
+
+        <div class="buttons">
+          <span class="icon-one" (click)="whatsaap()"> <ion-icon name="logo-whatsapp"></ion-icon></span>
+        <span class="icon-one" (click)="share(userInfo.businessName, userInfo.docId)"><ion-icon name="share-outline"></ion-icon></span>
+        <span  [ngClass]="{liked: liked}" (click)=" followerShop(userInfo.docId)"><ion-icon [name]="liked ?  'heart' : 'heart-outline'"></ion-icon></span>
+
+      </div>
+
+
+
+    </div>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+<ion-content [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+<div class="container" *ngIf="userInfo">
+<div class="hero" style="background-image:url({{userInfo.image}})">
+
+  <div class="bg-dark">
+    <div class="favorite">
+      <ion-buttons >
+        <ion-back-button style="color:white" text="" defaultHref="tabs/tab1" mode="ios" ></ion-back-button>
+      </ion-buttons>
+
+
+      <div style="display:flex; flex-direction:column">
+        <ion-label class="title">{{userInfo.businessName}}</ion-label>
+        <ion-label style="color:white; margin-top:-10px; margin-left:4px" *ngIf="userInfo.followers > 0">{{userInfo.followers}} followers</ion-label>
+      </div>
+
+      <div class="buttons">
+        <span class="icon-one" (click)="whatsaap()"> <ion-icon name="logo-whatsapp"></ion-icon></span>
+      <span class="icon-one" (click)="share(userInfo.businessName, userInfo.docId)"><ion-icon name="share-outline"></ion-icon></span>
+      <span  [ngClass]="{liked: liked}" (click)=" followerShop(userInfo.docId)"><ion-icon [name]="liked ?  'heart' : 'heart-outline'"></ion-icon></span>
+
+    </div>
+
+    </div>
+
+    <div class="ratings" *ngIf="products.length > 0">
+      <ion-label >{{products.length}} Products</ion-label>
+    </div>
+  </div>
+</div>
+<div class="header">
+  <ion-label class="title">{{userInfo.category}}</ion-label>
+  <ion-text class="tagline">{{userInfo.tagline}}</ion-text>
+  <ion-note class="category">{{userInfo.about}}</ion-note>
+</div>
+  <div class="catalogue">
+    <ion-label class="title">Catalogue</ion-label>
+
+
+
+
+  <div style="display:grid; grid-template-columns: auto auto;">
+
+<ion-col *ngFor="let product of products">
+  <app-catalogue-item  (click)=" detailsPage(product)" [product]="product" ></app-catalogue-item>
+</ion-col>
+  </div>
+  </div>
+
+</div>
+
+</ion-content>

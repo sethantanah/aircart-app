@@ -1,0 +1,42 @@
+<div style="min-width:300px">
+  
+
+<div style="width: 100%; display:flex; padding-right: 1em">
+  <ion-chip color="primary" style="margin-left:auto" (click)="createProduct()">Add New Product</ion-chip>
+</div>
+     <ion-searchbar mode="ios" #searchTerm debounce='500' (ionChange)="search(searchTerm.value)"
+     style="min-width: 150px"
+     ></ion-searchbar>
+     
+
+<div class="grid">
+  <ion-card *ngFor="let product of products">
+    <ion-chip color="primary" (click)="postProduct(product)">edit</ion-chip>
+    <img [src]="getImage(product.images)" alt="">
+
+    <ion-card-content class="description">
+      <ion-card-title>{{product.title}}</ion-card-title>
+      <!-- <ion-card-subtitle>Salt, sugar, milk</ion-card-subtitle> -->
+      <div class="buy">
+        <div class="price">
+          <span  class="discount">GHC{{product.price}}</span>
+          <span  class="actual " [class]="product.discount > 0 ? 'isdiscount': ''" *ngIf="product.discount > 0">GHC{{product.discount}}</span>
+          <span class="discount">Stock: {{product.stock > 0 ? product.stock:'Out of stock'}} </span>
+         
+
+          <span class="discount" *ngIf="product.clicks">{{product.clicks}} views</span>
+        </div>
+        <div class="cart" >
+          <ion-icon name="pencil-outline" (click)="postProduct(product)"></ion-icon>
+          <ion-icon name="trash-outline" (click)="deleteAlert(product)" style="margin-top: 15px;"></ion-icon>
+        </div>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+</div>
+
+<!-- <ion-fab (click)="createProduct()" vertical="top" horizontal="end">
+  <ion-fab-button>Add</ion-fab-button>
+</ion-fab> -->
+</div>

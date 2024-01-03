@@ -1,0 +1,112 @@
+
+
+<ion-content>
+<div class="main-container">
+    <div class="header">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="tabs/tab3" mode="ios"></ion-back-button>
+    </ion-buttons>
+  
+    
+      <span>Checkout</span>
+      <ion-icon class="search" name="cart" (click)="backTocart()">
+   
+      </ion-icon>
+    </div>
+
+
+    <form [formGroup]="orders">
+
+
+
+    <div class="shipping">
+    <ion-label>
+  Delivering to
+    </ion-label>
+<ion-radio-group>
+      <div class="address-area">
+       
+      <div class="title-area">
+        <ion-chip [color]="loc.active ? 'danger': 'primary'" (click)="toogleLoc(loc); " *ngFor="let loc of  deliveryLocations">{{loc.loc}}</ion-chip>
+        <ion-icon name="pencil" (click)="loc.setFocus()"></ion-icon>
+      </div>
+      <div class="address">
+       <ion-item lines="none">
+         <ion-label><ion-icon name="location"></ion-icon></ion-label>
+          <ion-input #loc autofocus="true" formControlName="address" (ionChange)="updateLoc()" value=""></ion-input>
+       </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="call"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="phone" (ionChange)="updateLoc()" value=""></ion-input>
+          </ion-item>
+       
+      </div>
+    </div>
+
+    <!-- <div class="address-area">
+      <div class="title-area">
+        <ion-radio [value]="'true'" ></ion-radio>
+        <span>Office</span>
+        <ion-icon name="pencil"></ion-icon>
+      </div>
+      <div class="address">
+        <p>Tarkwa tamso- New Road Junction</p>
+        <p>0591971286</p>
+      </div>
+    </div> -->
+    </ion-radio-group>
+
+    </div>
+    
+    <!-- <div class="add-address">
+      Add new address
+    </div> -->
+
+   
+
+    <div class="payment">
+      <ion-label>
+        Payment method
+      </ion-label>
+      <ion-radio-group  formControlName="payment">
+     <ion-item lines="none" (click)="payOptions('Cash on delivery')">
+    
+       <ion-radio value="Cash on delivery"  ></ion-radio>
+       <ion-label>Cash on delivery</ion-label>
+     </ion-item>
+      <ion-item lines="none" (click)="payOptions('MoMo')">
+        <ion-radio  value="momo" ></ion-radio>
+        <ion-label>MoMo</ion-label>
+      </ion-item>
+  
+        </ion-radio-group>
+    </div>
+
+    <div class="delivery">
+      <ion-label>
+        Preferred delivery time
+      </ion-label>
+
+      <div class="select-time">
+        <ion-datetime color="primary" locale="en-GH"  #popoverDatetime2 (ionChange)="
+        this.orders.patchValue({time: popoverDatetime2.value});"></ion-datetime>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="summary">
+
+  <div class="total">
+    <span>Total: {{cartItems}} items in cart</span>
+    <span class="cost">GHC{{price}}</span>
+  </div>
+
+  <ion-button id="button" (click)="sendOrder($event)">
+    <ion-icon name="cart-outline"></ion-icon>
+    <span>Place Order</span>
+  </ion-button>
+</div>
+</ion-content>

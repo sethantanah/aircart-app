@@ -1,0 +1,76 @@
+<ion-header [translucent]="true" class="ion-no-border" *ngIf="transparentToolBar">
+  <ion-toolbar>
+    <div class="header">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+      </ion-buttons>
+      
+      <ion-icon class="search" (click)="toSerachPage()" name="search">
+      </ion-icon>
+    </div>
+    </ion-toolbar>
+    </ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)">
+
+  <div class="header" *ngIf="!transparentToolBar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+    </ion-buttons>
+    <span>{{category}}</span>
+    <ion-icon class="search" (click)="toSerachPage()" name="search">
+    </ion-icon>
+  </div>
+
+  <!-- <ion-toolbar>
+    <div class="button-bar">
+      <ion-chip size="small" *ngFor="let cat of categories; let i = index"
+        [color]="cat.selected ? 'danger': 'primary'" 
+        (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.title)">
+        {{cat.title}}
+      </ion-chip>
+    </div>
+
+  </ion-toolbar> -->
+  <div class="main-content">
+    <div class="cart-items">
+      <ion-icon name="cart-outline"></ion-icon>
+      <span>4 items in cart</span>
+    </div>
+
+
+
+    <div  class="offer-items">
+     <div *ngFor="let item of products">
+      <app-bundles-list *ngIf="item.softdelete === false"  [product]="item"  (click)="productDetails(item)">
+      </app-bundles-list>
+     </div>
+
+      
+    </div>
+    
+    <!-- <div class="listings">
+      <app-products-list *ngFor="let item of allProducts" [discount]="false" [product]="item"
+        (click)="productDetails(item)">
+      </app-products-list>
+    </div> -->
+  </div>
+
+  <div class="button-bar"  style=" position: fixed; top: auto; bottom: 0px; z-index: 999; 
+  background-color: white; padding-bottom: 10px; padding-left:10px">
+
+<ion-chip size="small" *ngFor="let cat of categories; let i = index"
+[color]="cat.selected ? 'danger': 'primary'" 
+(click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.title)">
+{{cat.title}}
+</ion-chip>
+  </div>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

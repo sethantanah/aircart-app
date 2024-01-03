@@ -1,0 +1,73 @@
+ion-card{
+  flex-shrink: 0;
+  //width: 150px;
+
+    box-shadow: none;
+
+    display:flex;
+    flex-direction: column;
+  img{
+
+    //height: 100px;
+    max-height: 140px;
+    max-width: auto;
+
+    border-radius: 5px;
+    margin-left: auto;
+    margin-top: 2px;
+    margin-right: auto;
+
+    -webkit-transform: scale(0.10);
+    -moz-transform: scale(0.10);
+    -o-transform: scale(0.10);
+    transform: scale(1.1);
+  }
+
+
+
+  ion-card-title{
+    padding: 5px;
+    margin-left: -5px;
+    font-size: 14px;
+    font-weight:500;
+    color: black;
+  }
+  ion-card-content{
+    padding: 5px;
+    .buy{
+      display: flex;
+      .price{
+        //font-weight: bold;
+        font-size: 15px;
+        color: black;
+        margin-top: auto;
+        margin-bottom: auto;
+         span{
+          display: block;
+        }
+        .isdiscount{
+          text-decoration: line-through;
+         color:#E14E66;
+          font-size: 13px;
+        }
+      }
+      .cart{
+margin-left: auto;
+background-color: #FAE4E6;
+border-radius: 5px;
+width: 30px;
+height: 30px;
+
+text-align: center;
+ion-icon{
+color: #E14E66;
+margin-top: 5px;
+font-size: 20px;
+}
+      }
+    }
+  }
+}
+ion-card:hover{
+    box-shadow: 1px 1px 10px 1px rgb(210, 205, 205);
+}

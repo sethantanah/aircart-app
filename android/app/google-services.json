@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "865251929155",
+    "firebase_url": "https://ecommerce-engine01-3401c-default-rtdb.firebaseio.com",
+    "project_id": "ecommerce-engine01-3401c",
+    "storage_bucket": "ecommerce-engine01-3401c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865251929155:android:61f712d5049510b70138f6",
+        "android_client_info": {
+          "package_name": "shop.aircart.AirCart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865251929155-foei0b3o81l1lonr1ra6kmn5r7ln6rf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "shop.aircart.AirCart",
+            "certificate_hash": "d78af34d28914fc80f227c1917d9a02c79ba99f7"
+          }
+        },
+        {
+          "client_id": "865251929155-o0jvcppegjev0tqdsq6b5nut3a5vs9ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWOzDOXblVE247spExnxYFiZbdRFp-kzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865251929155-o0jvcppegjev0tqdsq6b5nut3a5vs9ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

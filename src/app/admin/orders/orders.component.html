@@ -1,0 +1,98 @@
+<div class="container">
+
+     
+      
+        <ion-card  >
+          <ion-badge *ngIf="order.is_delivered === false && order.is_cancelled === false">New</ion-badge>
+          <ion-item lines="none" class="titles">
+            <ion-label>
+              <ion-label style="font-size: 15px;">{{formatDate(order.orderDate)}}</ion-label>
+              <ion-label class="semi-bold">Order {{order.orderId}}</ion-label>
+            </ion-label>
+            <ion-label slot="end">
+              <ion-label style="text-decoration: line-through; font-size: 13px;">GHC{{order.product.price * order.product.count}}</ion-label>
+              <ion-label >GHC{{(order.product.price  - order.product.discount) * order.product.count}}</ion-label>
+            </ion-label>
+          </ion-item>
+      
+          <ion-item lines="none">
+      
+            <div class="details">
+             <ion-item lines="none">
+                <ion-icon color="primary" name="basket"></ion-icon>
+                <ion-label slot="end">{{order.product.title}}</ion-label>
+                <ion-label slot="end">Qnty: {{order.product.count}}</ion-label>
+             </ion-item>
+              <!-- <p class="status" *ngIf="order.is_pending">
+                <svg id="Kebab_icon" data-name="Kebab icon" xmlns="http://www.w3.org/2000/svg" width="10" height="50"
+                  viewBox="0 0 10 50">
+                  <rect id="Rectangle_53" data-name="Rectangle 53" width="10" height="10" rx="5"
+                    transform="translate(10 40) rotate(90)" fill="#337361" />
+                </svg> Processing order
+              </p> -->
+            </div>
+          </ion-item>
+
+          <ion-item id="buttons" lines="none">
+            <ion-chip color="primary"  (click)=" model.present()">Order Details</ion-chip>
+          <ion-chip [color]="order.is_delivered ? 'danger': 'primary'"  (click)=" updateStatus('delivered', order.id, order.orderId)">Delivered </ion-chip>
+            <ion-chip [color]="order.is_cancelled ? 'danger': 'primary'" (click)="updateStatus('cancelled', order.id, order.orderId)">Cancelled </ion-chip>
+          </ion-item>
+      
+        </ion-card>
+    
+
+
+
+      <ion-modal trigger="trigger-button" #model [swipeToClose]="true" [initialBreakpoint]="0.8"
+        [breakpoints]="[0.1, 0.5, 0.9]">
+        <ng-template>
+<ion-list>
+  
+  <ion-item lines="none">
+    <ion-icon color="primary" name="basket"></ion-icon>
+    <ion-label >{{order.product.title}}</ion-label>
+    <ion-label slot="end">Qnty: {{order.product.count}}</ion-label>
+  </ion-item>
+
+
+
+<div style="max-height: 200px; display: flex; flex-direction: row; justify-content:center; overflow-x: scroll;">
+  <img *ngFor="let img of order.product.images" [src]="img" alt="">
+ 
+</div>
+<ion-item>
+  <ion-note style="padding-left: 1em;">
+  <ion-chip color="primary"> Size {{order.product.sizes}}</ion-chip>
+   {{order.product.description}}
+  </ion-note>
+</ion-item>
+
+          <ion-item lines="none">
+            <ion-icon color="primary" name="person-outline"></ion-icon>  <ion-label style="margin-left:15px;">{{order.ordererInfo.orderer}}</ion-label>
+           </ion-item>
+  
+            <ion-item lines="none" button (click)="makeCall(order.ordererInfo.phone)">
+              <ion-icon color="secondary" name="call-outline"></ion-icon> <ion-label style="margin-left:15px;">{{order.ordererInfo.phone}}</ion-label>
+            </ion-item>
+
+            <ion-item lines="none" button (click)="sendMessage(order.ordererInfo.phone)">
+              <ion-icon color="secondary" name="logo-whatsapp"></ion-icon> <ion-label style="margin-left:15px;">{{order.ordererInfo.phone}}</ion-label>
+            </ion-item>
+  
+            <ion-item lines="none">
+              <ion-icon color="primary" name="location-outline"></ion-icon> <ion-label style="margin-left:15px;">Deliver to: {{order.ordererInfo.address}}</ion-label>
+            </ion-item>
+              <ion-item lines="none" *ngIf="order.ordererInfo.time">
+                <ion-icon color="primary" name="calendar-outline"></ion-icon>
+             <ion-label class="ion-text-wrap"  style="margin-left:15px;">  Prefered Delivery Time: {{formatDate(order.ordererInfo.time)}}</ion-label>
+              </ion-item>
+                <ion-item lines="none">
+                  <ion-icon color="primary" name="card-outline"></ion-icon>
+                  <ion-label style="margin-left:15px;">Payment Option: {{order.ordererInfo.payment}}</ion-label>
+                  
+                </ion-item>
+        </ion-list>
+        </ng-template>
+      </ion-modal>
+</div>

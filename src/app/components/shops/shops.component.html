@@ -1,0 +1,21 @@
+<ion-card class="shop" (click)="recordMetrics()">
+<div class="image"  style="background-image:url({{shop.image}})">
+ 
+    <div class="darkbg">
+      <div class="like" [ngClass]="{liked: liked}">
+        <ion-icon [name]="liked ?  'heart' : 'heart-outline'"></ion-icon>
+      </div>
+
+      <span>Closed Now</span>
+    </div>
+</div>
+<div class="description">
+  <span class="title">{{shop.businessName}}</span>
+  <span class="location">{{shop.tagline}}</span>
+  <div class="reviews">
+
+  <ion-icon name="location"></ion-icon>
+   {{shop.locality ? shop.locality : shop.address}}
+</div>
+</div>
+</ion-card>

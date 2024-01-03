@@ -1,0 +1,146 @@
+ion-header{
+  position:absolute;
+}
+
+ion-toolbar {
+  --ion-toolbar-background: transparent;
+  }
+
+  img{
+    width: 100%;
+z-index:0;
+  }
+  .hero{
+  
+
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    
+    
+  }
+  .bg-dark{
+    display:flex;
+    background-color: rgba(0,0,0,0.3);
+    flex-direction:column;
+    width:100%;
+    height:300px;
+    padding:1em;
+    padding-bottom:0;
+    padding-right:0;
+  }
+  .favorite{
+   // position:absolute;
+   display:flex;
+   background:transparent;
+   .buttons{
+    margin-left:auto;
+   margin-right:10px;
+   }
+
+   .title{
+    font-size:18px;
+    font-weight:bold;
+    //display:block;
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left:5px;
+    color: white;
+
+  }
+ 
+   div{
+    display:flex;
+    gap:10px;
+    span{
+     
+      height:35px;
+      width:35px;
+  
+      border-radius:50%;
+      display:flex;
+      ion-icon{
+        font-size:23px;
+        margin:auto auto auto auto;
+      }
+      
+      //top:30%;
+      background-color: white;
+      }
+
+      span:hover{
+        ion-icon{
+          color:#E14E66;
+        }
+      }
+   }
+
+
+   .liked{
+   
+    ion-icon{
+      color:#E14E66;
+    }
+   }
+
+ 
+  }
+
+ 
+  .ratings{
+   // position:absolute;
+   margin-top:auto;
+   margin-left:auto;
+   font-size:15px;
+   
+    //background-color: rgba(0,0,0,0.3);
+    padding:3px;
+    color:white;
+    font-weight:bold;
+    border-radius: 10px;
+    span{
+     
+    // height:30px;
+    // width:30px;
+
+    border-radius:50%;
+    display:flex;
+    ion-icon{
+      margin:auto auto auto auto;
+    }
+    
+    //top:30%;
+ 
+    } 
+
+   
+  }
+
+  .header{
+    padding: 1em;
+    //border:1px solid #E14E66;
+    border-radius: 20px;
+   // margin:5px;
+    .title{
+      font-size:16px;
+      font-weight:bold;
+      display:block;
+  
+    }
+    .tagline{
+  display:block
+    }
+  }
+
+
+.catalogue{
+  padding:1em;
+  padding-top:0;
+  .title{
+    font-size:16px;
+    font-weight:bold;
+    display:block;
+    margin-top: 30px;
+
+  }
+}

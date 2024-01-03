@@ -1,0 +1,68 @@
+.header{
+  padding: 10px 0.7em;
+  display: flex;
+  ion-icon{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 25px;
+  }
+  .search{
+    margin-left: auto;
+  }
+  span{
+        margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 18px;
+  }
+}
+
+
+
+
+.category-items{
+  padding:  0 .7em;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 10px;
+  gap: 10px;
+  //overflow-x: scroll;
+
+  .item{
+ 
+    //width: 150px;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   box-shadow: 1px 1px 5px 1px rgb(210, 205, 205);
+   border-radius: 10px;
+   padding: 1px;
+   margin-left: 0;
+   width: 90px;
+img{
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+span{
+ 
+ // margin-left: 10px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+  }
+
+   .item:hover{
+background-color: #DC3C45;
+color: white;
+span{
+  color: white;
+}
+  }
+}

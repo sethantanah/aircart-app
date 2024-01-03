@@ -1,0 +1,78 @@
+<ion-header [translucent]="true" class="ion-no-border" *ngIf="transparentToolBar">
+<ion-toolbar>
+<!-- <div class="button-bar">
+  <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+    (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+    {{cat.category}}
+  </ion-chip>
+</div> -->
+<div class="header">
+  <ion-buttons slot="start">
+    <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+  </ion-buttons>
+  <!-- <span>{{title}}</span> -->
+  <ion-icon (click)="toSerachPage()" class="search" name="search">
+  </ion-icon>
+</div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content #ionContent id="content" [fullscreen]="true" scrollEvents="true"  (ionScroll)="onScroll($event)">
+
+<div class="header">
+  <ion-buttons slot="start">
+    <ion-back-button text="" defaultHref="tabs/tab1" mode="ios"></ion-back-button>
+  </ion-buttons>
+  <span>{{title}}</span>
+  <ion-icon (click)="toSerachPage()" class="search" name="search">
+  </ion-icon>
+</div>
+
+<!-- <ion-toolbar>
+  <div class="button-bar">
+    <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+     (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+      {{cat.category}}
+    </ion-chip>
+  </div>
+
+</ion-toolbar> -->
+  <div class="main-content" >
+
+
+
+<div *ngIf="discounts" style="display:grid; grid-template-columns: auto auto; flex-wrap: wrap; gap:20px; padding-bottom: 5em">
+  <div  *ngFor="let item of products">
+    <app-product-item *ngIf="item.discount > 0"  [product]="item" (click)="productDetails(item)">
+    </app-product-item>
+    </div>
+</div>
+
+<div *ngIf="!discounts" style="display:grid; grid-template-columns: auto auto; flex-wrap: wrap; gap:20px; padding-bottom: 5em">
+  <div  *ngFor="let item of products">
+    <app-product-item   [product]="item" (click)="productDetails(item)">
+    </app-product-item>
+    </div>
+</div>
+
+</div>
+
+
+  <div class="button-bar"  style=" position: fixed; top: auto; bottom: 0px; z-index: 999;
+  background-color: white; padding-bottom: 10px; ">
+    <ion-chip size="small" *ngFor="let cat of categories; let i = index" [color]="cat.selected ? 'danger': 'primary'"
+     (click)="categories[i].selected = !categories[i].selected; removeStyles(i, cat.category)">
+      {{cat.category}}
+    </ion-chip>
+  </div>
+
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
+</ion-content>

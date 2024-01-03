@@ -1,0 +1,24 @@
+<div class="item"  (click)=" recordMetrics()">
+  <img [src]="image" alt="">
+  <div class="description">
+    <span class="title">
+   {{product.title}}
+    </span>
+    <span class="size">
+      {{product?.sizes}}
+    </span>
+
+    <div class="price">
+    
+      <span class="" *ngIf=" !discount">GHC{{product.price}}</span>
+      <span class="discount" *ngIf="discount">GHC{{product.price}}</span>
+      <span class="actual isdiscount" *ngIf="discount">GHC{{product.price - product.discount}}</span>
+    </div>
+  </div>
+  <div class="buy">
+   
+    <div class="cart" (click)="addToCart($event, product)">
+      <ion-icon name="cart-outline"></ion-icon>
+    </div>
+  </div>
+</div>

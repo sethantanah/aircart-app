@@ -1,0 +1,87 @@
+ion-card {
+  flex-shrink: 0;
+  //width: 150px;
+  max-width: 180px;
+  min-width: 150px;
+  max-height: 220px;
+  min-height: 220px;
+
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  .image-x {
+  }
+
+  .discount-x {
+    left: 70%;
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    background-color: #e14e66;
+//     border-radius: 50%;
+// padding: 8px 0px 0px 0px;
+//     width: 35px;
+//     height: 35px;
+  }
+  img {
+    //height: 100px;
+    max-height: 140px;
+    max-width: 140px;
+
+    border-radius: 5px;
+    margin-left: auto;
+    margin-top: 2px;
+    margin-right: auto;
+
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -o-transform: scale(0.1);
+    transform: scale(1.1);
+  }
+
+  ion-card-title {
+    padding: 5px;
+    margin-left: -5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+  ion-card-content {
+    padding: 5px;
+    .buy {
+      display: flex;
+      .price {
+        //font-weight: bold;
+        font-size: 15px;
+        color: black;
+        margin-top: auto;
+        margin-bottom: auto;
+        span {
+          display: block;
+        }
+        .isdiscount {
+          text-decoration: line-through;
+          color: #e14e66;
+          font-size: 13px;
+        }
+      }
+      .cart {
+        margin-left: auto;
+        background-color: #fae4e6;
+        border-radius: 5px;
+        width: 30px;
+        height: 30px;
+
+        text-align: center;
+        ion-icon {
+          color: #e14e66;
+          margin-top: 5px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+ion-card:hover {
+  //box-shadow: 1px 1px 10px 1px rgb(210, 205, 205);
+}

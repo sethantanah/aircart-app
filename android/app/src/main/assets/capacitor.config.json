@@ -1,0 +1,6 @@
+{
+	"appId": "shop.aircart.AirCart",
+	"appName": "AirCart",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

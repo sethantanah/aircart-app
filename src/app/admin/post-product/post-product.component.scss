@@ -1,0 +1,71 @@
+
+.segment-button-checked{
+
+   --ion-background-color: #729EEA !important;
+
+    color: white !important;
+
+}
+
+.next-btn{
+
+  margin: auto;
+  margin-bottom: 0;
+}
+
+form, .form{
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    display:flex;
+
+    flex-direction: column;
+    ion-item{
+        margin: 10px;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+
+    ion-button{
+        width: 90%;
+      
+    }
+
+
+    ion-list{
+      #image{
+        width: 100px;
+        height: 100px;
+        display: flex;
+        gap: 10px;
+        margin: 5px;
+
+        img{
+          border-radius: 10px;
+        }
+
+        ion-icon{
+          position: absolute;
+          margin-left: auto;
+          font-size: 25px;
+
+        }
+      }
+    }
+
+}
+  .swiper{
+
+
+    }
+
+
+    .upload-image{
+      background-color: blue;
+      padding: 1em;
+      text-align: center;
+    }
+
+ion-spinner{
+  position: absolute;
+}

@@ -1,0 +1,84 @@
+
+
+
+<!-- (ionDrag)="itemDraged($event, remak); selectedR= remak?.remark"> -->
+
+<ion-item-sliding   *ngIf="product.count > 0">
+  <ion-item-options side="end">
+    <ion-icon size="large" (click)="deleteItem(product); product.count = 0" name="trash"></ion-icon>
+  </ion-item-options>
+  <ion-item lines="none" >
+    <img [src]="image" alt="">
+    <div class="description">
+      <span class="title">
+        {{product.title}}
+      </span>
+      <span class="size">
+        Size {{product.sizes}}
+      </span>
+    </div>
+    <div class="actions" slot="end">
+      <div class="buy">
+        <div class="price">
+          <span class="discount">GHC{{ (product.price-product.discount) *product.count}}</span>
+        </div>
+      </div>
+      <div class="increment">
+
+        <ion-chip color="danger" class="cart" (click)="removeFromCart($event, product); product.count = product.count-1">
+
+          -
+        </ion-chip>
+        <div class="count cart">
+          {{product.count}}
+
+        </div>
+        <ion-chip color="danger" class="cart" (click)="addToCart($event, product); product.count = product.count+1">
+          +
+
+        </ion-chip>
+      </div>
+    </div>
+  </ion-item>
+
+
+</ion-item-sliding>
+
+
+
+
+<!-- 
+<div class="item">
+  <img [src]="image" alt="">
+  <div class="wrap">
+
+    <div class="description">
+      <span class="title">
+      {{product.title}}
+      </span>
+      <span class="size">
+        Size {{product.sizes}}
+      </span>
+    </div>
+    <div class="buy">
+      <div class="price">
+        <span class="discount">GHC{{product.price}}</span>
+      </div>
+    </div>
+    <div class="increment">
+      
+    <ion-chip color="danger" class="cart" (click)="removeFromCart($event, product)">
+
+        -
+      </ion-chip>
+      <div class="count cart">
+        {{product.count}}
+
+      </div>
+      <ion-chip color="danger" class="cart" (click)="addToCart($event, product, product.count)">
+        +
+
+      </ion-chip>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/tab1" [routerLink]="['/tabs/tab1']" routerLinkActive="router-link-active"  mode="ios"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style=" display: flex; justify-content: center">
+    <ion-avatar  style="margin-left: auto; margin-right:auto; width:150px; height:150px">
+      <img  [src]=" 'https://www.djdesignerlab.com/wp-content/uploads/2020/09/e-commerce-website.jpg'" >
+    </ion-avatar>
+    </div>
+ <div class="form-container">
+  <form class="form" (ngSubmit)="login()" [formGroup]="credentials">
+
+<div class="forms">
+  <ion-card>
+    <div style="margin-bottom:10px; font-size:12px; font-weight: bold;text-align: center;">
+     <ion-label style=" font-size:18px; font-weight: bold;display: block;">Welcome back</ion-label>
+     <ion-note style="color:#211f20">Enjoy your shopping !</ion-note>
+    </div>
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div>
+    </div>
+    <ion-button style="font-size: 12px; margin-top:-13px" fill="clear" (click)="resetPassword()">Forgot Password</ion-button>
+
+    <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
+    <ion-button type="button" expand="block" color="danger" fill="clear" [routerLink]="['/registration','user' ]">Not yet a member?
+      Sign up!
+    </ion-button>
+
+    <!-- <ion-button type="submit" expand="block">Login with google</ion-button>
+    <ion-button type="button" expand="block" color="primary" fill="clear" [routerLink]="['/registration','user' ]">Not yet a member?
+      Sign up!
+    </ion-button> -->
+  </ion-card>
+</div>
+
+  </form>
+ </div>
+</ion-content>

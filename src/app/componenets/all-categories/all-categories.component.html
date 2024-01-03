@@ -1,0 +1,18 @@
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <ion-icon name="arrow-back">
+    </ion-icon>
+    <span>All Categories</span>
+    <ion-icon class="search" name="search">
+    </ion-icon>
+  </div>
+
+  <ion-list class="category-items">
+    <ion-card class="item active" *ngFor="let item of items">
+      <img [src]="item.image" alt="">
+      <span>{{item.name}}</span>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-card (click)="recordMetrics()">
+
+  <img [src]="image" alt="">
+  <ion-card-content class="description">
+    <ion-card-title>{{product.title}}</ion-card-title>
+    <!-- <ion-card-subtitle>Salt, sugar, milk</ion-card-subtitle> -->
+    <div class="buy">
+    <div class="price">
+      <span class="actual " [class]="product.discount > 0 ? 'isdiscount': ''">GHC{{product.price}}</span>
+       <span class="discount" *ngIf="product.discount > 0">GHC{{product.price - product.discount }}</span>
+    </div>
+      <div class="cart" (click)="addToCart($event, product)">
+        <ion-icon name="cart-outline"></ion-icon>
+      </div>
+    </div>
+  </ion-card-content>
+
+</ion-card>

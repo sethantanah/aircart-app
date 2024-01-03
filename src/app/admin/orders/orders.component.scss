@@ -1,0 +1,34 @@
+
+.container{
+ ion-card{
+    .titles{
+  font-weight: bold;
+  font-size: 17px;
+  .semi-bold{
+      font-size: 14px;
+      margin-top: 3px;
+  }
+     }
+     .details{
+   margin-left: 0;
+   padding-left: 0;
+   margin-bottom:-20px;
+     }
+     .status{
+        margin-top: -20px;
+         font-size: 14px;
+         font-weight: bold;
+         color: #337361;
+     }
+     #buttons{
+         display: flex;
+         flex-direction: row;
+         justify-content: space-evenly;
+         width: 100%;
+         flex-wrap: wrap;
+       ion-chip{
+           flex-shrink: 0;
+       }
+     }
+ }
+}

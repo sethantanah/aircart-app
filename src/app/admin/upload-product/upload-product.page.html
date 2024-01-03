@@ -1,0 +1,208 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="header" style="display:flex; flex-direction: row; margin-left: .7em;">
+      <ion-buttons>
+        <ion-back-button text="" defaultHref="tabs/tab1" mode="ios" ></ion-back-button>
+      </ion-buttons>
+      <ion-title>Product Upload</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <!-- <div style="display:flex; flex-direction:row; padding-bottom:20px; background-color:rgba(0,0,0,0.2)">
+    <ion-buttons >
+      <ion-back-button text="" defaultHref="tabs/tab1" mode="ios" ></ion-back-button>
+    </ion-buttons>
+  <ion-title>Product Upload</ion-title>
+  </div> -->
+<div class="form-container">
+  <form class="form" [formGroup]="productForm" #prodform="ngForm">
+  <swiper [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="true" [zoom]="true"
+    (swiper)="setSwiperInstance($event)">
+
+    <ng-template swiperSlide>
+
+     <div class="forms">
+      <ion-card>
+        <ion-item lines="none">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="description" rows="10"
+            placeholder="Please provide a detailed description of your product"></ion-textarea>
+        </ion-item>
+
+
+        <ion-item lines="none">
+          <ion-label>category</ion-label>
+          <ion-select formControlName="category" (ionDismiss)="category.present(); filterSubCategories(); "
+            interface="popover">
+            <ion-select-option  [value]="cat.category" *ngFor="let cat of topCategories">
+              {{cat.category}}
+            </ion-select-option>
+
+
+          </ion-select>
+
+
+
+
+        </ion-item>
+        <ion-icon style="margin-top: 20px" (click)="nextSlide(1)" size="large" button name="arrow-forward"></ion-icon>
+      </ion-card>
+     </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="forms">
+        <ion-card>
+
+
+     <ion-item lines="none">
+            <ion-label position="floating">Stock</ion-label>
+            <ion-input type="number" formControlName="stock"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Size/Weight</ion-label>
+            <ion-input type="text" placeholder="Size 30 or 3kg" formControlName="sizes"></ion-input>
+
+          </ion-item>
+
+
+        <ion-item lines="none">
+          <ion-label position="floating">Price (GHC)</ion-label>
+          <ion-input type="number" formControlName="price"  ></ion-input>
+        </ion-item>
+
+
+        <ion-item lines="none">
+          <ion-label position="floating">Discount (GHC)</ion-label>
+          <ion-input type="number" formControlName="discount" ></ion-input>
+        </ion-item>
+
+<ion-item lines="none">
+  <ion-label slot="start">Negotiable</ion-label>
+  <ion-checkbox slot="end" formControlName="negotiable" [checked]="productForm.value.negotiable"></ion-checkbox>
+</ion-item>
+
+
+
+
+     <ion-icon style="margin-top: 20px" (click)="nextSlide(2)" size="large" button name="arrow-forward"></ion-icon>
+          </ion-card>
+          </div>
+    </ng-template>
+
+
+    <ng-template swiperSlide>
+      <div class="forms">
+        <ion-card>
+          <ion-icon style="margin-top: 20px" (click)="nextSlide(1)" size="large" button name="arrow-back"></ion-icon>
+
+        <ion-item lines="none" button (click)="selectFiles()">
+          <ion-label>
+            <ion-chip  color="primary">Select images</ion-chip>
+
+          </ion-label>
+          <ion-icon color="primary" name="camera" slot="end" ></ion-icon>
+          <input style="display: none" id='file-input' type="file" multiple="true"
+            accept=".jpg, .png, .gif, .jpeg" (change)="filesSelected($event)">
+        </ion-item>
+        <ion-list style="display: flex; flex-direction: row;" *ngIf="routeAction === 'edit' && uploadedImages.length > 0" >
+          <div id="image" *ngFor="let img of uploadedImages; let i = index" style=" flex-shrink: 0;">
+            <ion-icon name="trash" color="danger" (click)="deleteImage(img)"></ion-icon>
+            <img [src]="img">
+
+          </div>
+        </ion-list>
+
+          <ion-list style="display: flex; flex-direction: row;" *ngIf="imagePath.length>0">
+
+            <div id="image" *ngFor="let img of imagePath; let i = index" style=" flex-shrink: 0;">
+              <ion-icon name="trash" color="danger" (click)="removeImage(i)"></ion-icon>
+              <img [src]="img">
+
+            </div>
+          </ion-list>
+
+
+
+
+
+
+
+        <ion-button style="margin-left: auto; margin-right: auto;" [disabled]="!productForm.valid" fill="clear" (click)="uploadProductItem(); category.dismiss()">{{routeAction === "edit" ? "Update": "Upload"}}</ion-button>
+
+
+        </ion-card>
+      </div>
+    </ng-template>
+
+  </swiper>
+
+  <ion-popover style="height: 100%; overflow-y: scroll; padding-bottom: 2em;padding-top:1em"  #category [dismissOnSelect]="true">
+    <ng-template>
+      <ion-item  *ngFor="let cat of filetrsubCategory">
+        <ion-label (click)="this.productForm.patchValue({'subCategory': cat.title}); category.dismiss()">
+          {{cat.title}}
+        </ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-popover>
+</form>
+</div>
+
+
+
+
+
+</ion-content>
+
+
+<!-- <form [formGroup]="venderForm">
+  <h3>Vender Details</h3>
+  <ion-item>
+    <ion-label position="floating">Name</ion-label>
+    <ion-input formControlName="name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea formControlName="description" placeholder="Please provide a detailed description of your business">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>category</ion-label>
+    <ion-select formControlName="category">
+      <ion-select-option [value]="cat.category" *ngFor="let cat of topCategories">
+        {{cat.category}}
+      </ion-select-option>
+    </ion-select>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Location</ion-label>
+    <ion-input formControlName="location"></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label position="floating">Phone</ion-label>
+    <ion-input formControlName="phone"></ion-input>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input formControlName="email"></ion-input>
+  </ion-item>
+
+</form> -->

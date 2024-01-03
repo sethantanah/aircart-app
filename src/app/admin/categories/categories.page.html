@@ -1,0 +1,179 @@
+<ion-header [translucent]="false" class="ion-no-border">
+  <div style="display:flex; flex-direction:row">
+    <ion-buttons>
+      <ion-back-button text="" defaultHref="dashboard" mode="ios"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color:black">Manage Categories</ion-title>
+</div>
+  <ion-toolbar>
+    <div class="button-bar">
+      <ion-chip size="small" *ngFor="let btn of categories; let i = index" [color]="btn.selected ? 'danger': 'primary'"
+        (click)="categories[i].selected = !categories[i].selected; removeStyles(i); nextSlide(i) ">
+        {{btn.name}}
+      </ion-chip>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" (ionScroll)="onScroll($event)">
+
+
+  <swiper [autoplay]="false" [keyboard]="true" [pagination]="false" [scrollbar]="true" [zoom]="true"
+    (swiper)="setSwiperInstance($event)">
+    <ng-template swiperSlide>
+    <div class="container-x">
+      <ion-chip class="add" color="secondary" (click)="maintriggered.present(); this.clearForms();">Add</ion-chip>
+      <ion-list class="category-items">
+        <ion-card class="item active" *ngFor="let item of  topCategories" (click)="selectTopCat(item); maintriggered.present()">
+          <img [src]="item.image" alt="">
+          <span>{{item.category}}</span>
+        </ion-card>
+      </ion-list>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+    <div class="container-x">
+      <ion-chip class="add" color="secondary" (click)="triggered.present(); this.clearForms();">Add</ion-chip>
+      <ion-list class="category-items">
+        <ion-chip [color]="item.color" *ngFor="let item of  subCategory"(click)="selectSubCat(item); triggered.present()">{{item.title}}</ion-chip>
+      </ion-list>
+    </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="container-x">
+        <ion-chip class="add" color="secondary" (click)="bannerstriggered.present(); this.clearForms();">New</ion-chip>
+        <ion-list class="banner-items">
+        <div *ngFor="let item of banners">
+<div style="position: relative;">
+  <img [src]="item.image"  (click)="selectBanner(item); bannerstriggered.present()">
+  <ion-chip style="position: absolute;left: 14px; background-color: white;" color="primary" (click)="selectBanner(item); bannerstriggered.present()">{{item.active ? "Active": "Not-active"}}</ion-chip>
+  <ion-badge *ngIf="item.clicks" style="" color="primary">{{item.clicks}} views</ion-badge>
+</div>
+        </div>
+        </ion-list>
+
+        
+      </div>
+    </ng-template>
+    </swiper>
+
+
+    <ion-popover trigger="size-button" #triggered [backdropDismiss]="false">
+      <ng-template>
+        <ion-content>
+         <form action="" [formGroup]="subCatForm" >
+            <ion-item>
+            <ion-label position="floating">Category:</ion-label>
+          <ion-input formControlName="title"></ion-input>
+          </ion-item>
+         <ion-item>
+           <ion-label position="floating">Top Category</ion-label>
+            <ion-select formControlName="category">
+              <ion-select-option [value]="item.category" *ngFor="let item of  topCategories">
+               {{item.category}}
+              </ion-select-option>
+            </ion-select>
+         </ion-item>
+
+         <ion-chip color="danger" (click)="triggered.dismiss()">
+          Cancel
+       </ion-chip>
+         <ion-chip color="danger" (click)="deleteSubCategory(selectedSubCategory.id);triggered.dismiss()">
+           Delete
+         </ion-chip>
+
+           <ion-chip color="primary" (click)="createSubCategory(); triggered.dismiss()">
+            Save
+         </ion-chip>
+         </form>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+
+        <ion-popover trigger="size-button" class="--offset-y:-250px" #maintriggered  [backdropDismiss]="false">
+          <ng-template>
+            <ion-content>
+              <form action="" [formGroup]="mainCatForm">
+                <ion-item>
+                  <ion-label position="floating">Category:</ion-label>
+                  <ion-input formControlName="category"></ion-input>
+                </ion-item>
+                  <!-- <ion-item>
+                    <ion-label position="floating">Image:</ion-label>
+                    <ion-input formControlName="image"></ion-input>
+                  </ion-item> -->
+                  <ion-item button lines="none" color="primary" (click)="selectFiles('file-input1')">
+                    <ion-label>
+                      <ion-chip >{{ images.length <= 0 ? 'Select Image': "Image selected"}}</ion-chip>
+
+                    </ion-label>
+                    <ion-icon name="camera" slot="end" ></ion-icon>
+                    <input style="display: none" id='file-input1' type="file" multiple="true" accept=".jpg, .png, .gif, .jpeg"
+                      (change)="filesSelected($event)">
+                  </ion-item>
+
+
+                  <ion-chip color="danger" (click)="maintriggered.dismiss()">
+                    Cancel
+                  </ion-chip>
+                <ion-chip color="primary" (click)="createTopCategory(); maintriggered.dismiss()">
+                  Save
+                </ion-chip>
+
+             
+              </form>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+
+
+
+
+
+
+        <ion-popover class="--offset-y:-280px" trigger="size-button" #bannerstriggered [backdropDismiss]="false">
+          <ng-template>
+            <ion-content>
+              <form *ngIf="user.admin" action="" [formGroup]="bannerForm">
+                  <ion-item button lines="none" color="primary" (click)="selectFiles('file-input')">
+                    <ion-label >
+                      <ion-chip >{{ images.length <= 0 ? 'Select Image': "Image selected"}}</ion-chip>
+
+                    </ion-label>
+                    <ion-icon name="camera" slot="end" ></ion-icon>
+                    <input style="display: none" id='file-input' type="file" multiple="true" accept=".jpg, .png, .gif, .jpeg"
+                      (change)="filesSelected($event)">
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>OwnersId</ion-label>
+                    <ion-input formControlName="owner"></ion-input>
+                  </ion-item>
+                <ion-item color="primary">
+                  <ion-label >Active:</ion-label>
+                  <ion-checkbox  formControlName="active"></ion-checkbox>
+                </ion-item>
+
+                <ion-chip color="danger" (click)="bannerstriggered.dismiss()">
+                  Cancel
+                </ion-chip>
+                <ion-chip color="danger" (click)="deleteBanner(selectedBanner.id, selectedBanner.image);bannerstriggered.dismiss()">
+                  Delete
+                </ion-chip>
+
+                <ion-chip color="primary" (click)="createBanner();bannerstriggered.dismiss()">
+                  Save
+                </ion-chip>
+              </form>
+
+              <div style="padding: 1em" *ngIf="!user.admin">
+              <ion-text>  Banners are a great way to grabe user attention to your products. Let AirCart help you create and launch an attractive banner</ion-text>
+
+              <ion-button (click)="whatsaap()">Get it Now!</ion-button>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+        </ion-content>
